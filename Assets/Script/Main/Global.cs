@@ -122,6 +122,7 @@ public class Global
     public Sprite LoadCharacterHeadSpite(string name)
     {
         Sprite sprite = Resources.Load<Sprite>("Sprite/Character/" + name + "Head");
+        Debug.Log("Sprite/Character/" + name + "Head");
         if (sprite == null)
         {
             throw new Exception("No such character head sprite: " + name);

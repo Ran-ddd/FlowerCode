@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c153495cdf7d5a40afe20a4b6e9edbf
+guid: fb2b35ea4ca1bdc44b46db2a14204d06
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -93,17 +93,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BossHead_0
+      name: "BossHead - \u526F\u672C_0"
       rect:
         serializedVersion: 2
-        x: 909
-        y: 1939
-        width: 498
-        height: 603
+        x: 896
+        y: 1935
+        width: 525
+        height: 615
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 504d1a89fa285f14c96eedacccc0d147
-      internalID: 2091284558
+      spriteID: 0a4e619625560c84da7cdfdf064ba887
+      internalID: -443363877
       vertices: []
       indices: 
       edges: []
@@ -128,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BossHead_0: 2091284558
+      "BossHead - \u526F\u672C_0": -443363877
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

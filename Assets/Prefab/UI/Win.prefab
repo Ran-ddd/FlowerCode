@@ -217,8 +217,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u606D\u559C\u901A\u5173"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd8181db59381c84a85b208672523834, type: 2}
-  m_sharedMaterial: {fileID: 4575273522330137047, guid: bd8181db59381c84a85b208672523834, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92623aacb30145c41ba23e76ef871fa0, type: 2}
+  m_sharedMaterial: {fileID: -8104590142289271230, guid: a3389625116b4b945bebac750abce439, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7719060622231667177
@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1515984642760182666
 RectTransform:
   m_ObjectHideFlags: 0
@@ -375,3 +375,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dff229eebbe61e419a6d2fba374cec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  returnScene: 1
