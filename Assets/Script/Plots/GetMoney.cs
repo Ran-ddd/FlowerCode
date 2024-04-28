@@ -13,6 +13,6 @@ public class GetMoney : MonoBehaviour
     }
     void GetCoin()
     {
-        global.collectItems.Add("Coin");
+        global.collectedItems.Add("Coin");
     }
 }

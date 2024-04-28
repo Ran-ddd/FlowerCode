@@ -25,7 +25,10 @@ public class Though : MonoBehaviour
     {
         CancelInvoke(nameof(Clear));
         textUI.text = though;
-        Invoke(nameof(Clear), stayTime);
+        if (stayTime > 0)
+        {
+            Invoke(nameof(Clear), stayTime);
+        }
     }
 
     void Clear()

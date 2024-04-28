@@ -8,6 +8,10 @@ public class InteractManager : MonoBehaviour
     // 全局单例
     private Global global = Global.Instance;
 
+    // 
+    private Transform playerTarget;
+    private Transform player;
+
     [Header("激活蒙版的 UI")]
     public List<GameObject> activeMaskUIs;
 
@@ -38,6 +42,10 @@ public class InteractManager : MonoBehaviour
     public GameObject comfirmBoxUI;
     private ComfirmBox comfirmBox;
 
+    [Header("物码框")]
+    public GameObject itemToCodeInfoUI;
+    private ItemToCodeInfo itemToCodeInfo;
+
 
     void Start()
     {
@@ -48,6 +56,11 @@ public class InteractManager : MonoBehaviour
         bag = bagUI.GetComponent<Bag>();
         though = thoughUI.GetComponent<Though>();
         comfirmBox = comfirmBoxUI.GetComponent<ComfirmBox>();
+        itemToCodeInfo = itemToCodeInfoUI.GetComponent<ItemToCodeInfo>();
+
+        // 位移
+        playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         // 暴露给全局的 UI 显示接口
         global.UseUI += UseUI;
@@ -61,7 +74,20 @@ public class InteractManager : MonoBehaviour
 
     void Update()
     {
-        mask.SetActive(activeMaskUIs.Any(ui => ui.activeSelf));
+        PreventClick();
+    }
+
+    void PreventClick()
+    {
+        if (activeMaskUIs.Any(ui => ui.activeSelf))
+        {
+            playerTarget.position = player.position;
+            mask.SetActive(true);
+        }
+        else
+        {
+            mask.SetActive(false);
+        }
     }
 
     public void UseUI(string choice, params string[] parameters)
@@ -85,6 +111,9 @@ public class InteractManager : MonoBehaviour
                 break;
             case "Comfirm":
                 UseComfirmBoxUI(parameters[0], parameters[1], parameters.Skip(2).ToArray());
+                break;
+            case "ItemToCode":
+                UseItemToCodeInfoUI(parameters[0]);
                 break;
             default:
                 throw new Exception("Invalid UseUI Choice: " + choice);
@@ -122,6 +151,7 @@ public class InteractManager : MonoBehaviour
 
     public void UseThoughUI(string word, float stayTime)
     {
+        Debug.Log("1");
         thoughUI.SetActive(true);
         though.though = word;
         though.stayTime = stayTime;
@@ -135,5 +165,14 @@ public class InteractManager : MonoBehaviour
         comfirmBox.function = function;
         comfirmBox.inputs = inputs;
         comfirmBox.Show();
+    }
+
+    public void UseItemToCodeInfoUI(string itemName)
+    {
+        itemToCodeInfoUI.SetActive(true);
+        itemToCodeInfo.itemSprite = global.LoadItemSpite(itemName);
+        itemToCodeInfo.codeSprite = global.LoadItemSpite(itemName + "Code");
+        itemToCodeInfo.textAsset = global.LoadItemTextAsset(itemName);
+        itemToCodeInfo.Show();
     }
 }

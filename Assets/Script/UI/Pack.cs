@@ -7,7 +7,7 @@ public class Pack : MonoBehaviour
 
     void OnEnable()
     {
-        string[] itemNames = global.collectItems.ToArray();
+        string[] itemNames = global.collectedItems.Except(global.comsumedItems).ToArray();
         int n = itemNames.Length;
 
         for (int i = 0; i < n; i++)

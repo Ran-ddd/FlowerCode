@@ -33,6 +33,9 @@ public class Global
         NextProgress();
     }
 
+    // 教学结束
+    public bool teachEnd = false;
+
     // 角色位置管理
     public Dictionary<int, Vector3> lastPositionInScenes = new();
 
@@ -41,7 +44,8 @@ public class Global
     public TalkFinishDelegate TalkFinish;
 
     // 背包管理
-    public HashSet<string> collectItems = new() { "Letter" };
+    public HashSet<string> collectedItems = new() { "Letter" };
+    public HashSet<string> comsumedItems = new() { };
     public GameObject itemBeDrag;
     public bool willDragTo = false;
 
@@ -83,18 +87,6 @@ public class Global
         progress = progresses[progressIndex];
         Debug.Log($"Into Process: {progress}");
     }
-
-    // TODO
-    // // 事件触发 
-    // private Dictionary<string, List<string>> events = new Dictionary<string, List<string>> {
-    //     {"", new List<string> { "NPC" }}
-    // };
-
-    // public void EventTrigger(string source, string name)
-    // {
-
-    // }
-
 
     // <------------->
 
@@ -165,7 +157,7 @@ public class Global
 
 
 
-
+public delegate void ClickDelegate();
 public delegate void TouchDelegate();
 public delegate void SelectDelegate();
 public delegate void DragToDelegate();

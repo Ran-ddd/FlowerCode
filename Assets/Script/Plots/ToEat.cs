@@ -18,4 +18,5 @@ public class ToEat : MonoBehaviour
         global.UseUI("Though", "有点饿了，快点去吃个饭", "2");
         gameObject.SetActive(false);
     }
+
 }

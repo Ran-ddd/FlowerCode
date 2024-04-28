@@ -7,6 +7,9 @@ TagManager:
   - Cursor
   - Board
   - Environment
+  - Item
+  - ItemInfo
+  - PlayerTarget
   layers:
   - Default
   - TransparentFX

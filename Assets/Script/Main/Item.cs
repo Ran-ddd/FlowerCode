@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     {
         selectTrigger = GetComponent<SelectTrigger>();
 
-        if (IsCollected())
+        if (IsCollectedOrConSumed())
         {
             gameObject.SetActive(false);
         }
@@ -29,12 +29,12 @@ public class Item : MonoBehaviour
     void CollectItem()
     {
         gameObject.SetActive(false);
-        global.collectItems.Add(name);
+        global.collectedItems.Add(name);
     }
 
 
-    bool IsCollected()
+    bool IsCollectedOrConSumed()
     {
-        return global.collectItems.Contains(name);
+        return global.collectedItems.Contains(name) || global.comsumedItems.Contains(name);
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine.EventSystems;
 
 public class SelectTrigger : MonoBehaviour
 {
-    [Header("可被触碰触发")]
+    [Header("鼠标点击触发")]
+    public bool canBeClick = false;
+
+    [Header("角色触碰触发")]
     public bool canBeTouch = false;
 
-    [Header("可被点击触发")]
-    public bool canBeSelect = true;
+    [Header("角色点击触发")]
+    public bool canBeSelect = false;
 
     [Header("可被赋予物品")]
     public bool canBeDragTo = false;
@@ -16,6 +19,7 @@ public class SelectTrigger : MonoBehaviour
     private bool isCursor = false;
     private bool isPlayer = false;
 
+    public ClickDelegate Click;
     public TouchDelegate Touch;
     public SelectDelegate Select;
     public DragToDelegate DragTo;
@@ -24,16 +28,24 @@ public class SelectTrigger : MonoBehaviour
 
     void Start()
     {
+
     }
+
     void Update()
     {
-        // 近距离触碰触发
+        // 鼠标点击触发
+        if (canBeClick && Input.GetMouseButtonDown(0) && isCursor)
+        {
+            Click();
+        }
+
+        // 角色触碰触发
         if (canBeTouch && isPlayer)
         {
             Touch();
         }
 
-        // 近距离点击触发
+        // 角色点击触发
         if (canBeSelect && global.IsClickNotOnUI() && isPlayer && isCursor)
         {
             Select();

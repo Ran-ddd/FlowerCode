@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +22,11 @@ public class ItemInfo : MonoBehaviour
         if (textList[0].Trim() == "<C>")
         {
             Global.Instance.NextProgress();
-            textUI.text = textList[1];
+            textUI.text = textList.Skip(1).Aggregate((a, b) => a + "\n" + b);
         }
         else
         {
-            textUI.text = textList[0];
+            textUI.text = textAsset.text;
         }
     }
 

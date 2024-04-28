@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private float dirY = 1;
     private Vector3 originScale;
     private Global global = Global.Instance;
+    public float offset = 0.1f;
 
 
     [Header("角色寻路终点")]
@@ -36,14 +37,16 @@ public class Player : MonoBehaviour
     {
         // 向量：由玩家到目标
         Vector3 displacement = playerTarget.position - transform.position;
+        Debug.Log(displacement);
 
-        if (Math.Abs(displacement.x) > 0.3f)
+        if (Math.Abs(displacement.x) > offset)
         {
             dirX = Math.Sign(displacement.x);
         }
-        if (Math.Abs(displacement.y) > 0.3f)
+        if (Math.Abs(displacement.y) > offset)
         {
-            dirY = Math.Sign(displacement.y);
+            Debug.Log("dir: " + Math.Sign(displacement.y - offset));
+            dirY = Math.Sign(displacement.y + offset);
         }
 
         transform.localScale = new Vector3(dirX * originScale.x, originScale.y, originScale.y);

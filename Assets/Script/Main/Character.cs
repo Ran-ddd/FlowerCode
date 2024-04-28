@@ -35,7 +35,8 @@ public class Character : MonoBehaviour
 
         if (itemNeed == packItem.itemName && global.itemProgress.ContainsKey(itemNeed) && global.progress == global.itemProgress[itemNeed])
         {
-            global.collectItems.Remove(itemNeed);
+            global.collectedItems.Remove(itemNeed);
+            global.comsumedItems.Add(itemNeed);
             global.NextProgress();
             packItem.Consume();
             Talk();

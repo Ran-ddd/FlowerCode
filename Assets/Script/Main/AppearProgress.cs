@@ -24,14 +24,14 @@ public class AppearProgress : MonoBehaviour
     void Start()
     {
         // 初始化检查
-        if (appearProgress == global.progress)
+        if (appearProgress == global.progress && obj != null)
         {
-            gameObject.SetActive(true);
+            obj.SetActive(true);
         }
 
-        if (disappearProgress == global.progress)
+        if (disappearProgress == global.progress && obj != null)
         {
-            gameObject.SetActive(false);
+            obj.SetActive(false);
         }
 
         // 跟踪检查

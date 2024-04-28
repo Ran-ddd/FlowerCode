@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Abacus.unity
     guid: c46ab80649d785b45bfa7c73131d4b43
+  - enabled: 1
+    path: Assets/Scene/CodePuzzle.unity
+    guid: bdae14201f10ab341968d470f50ecb59
   m_configObjects: {}
