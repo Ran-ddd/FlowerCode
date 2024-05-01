@@ -6,12 +6,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// 提供一个确认框 UI
 public class ComfirmBox : MonoBehaviour
 {
+    [Header("文本UI")]
+    public TMP_Text text;
+
+    [Header("确认框输入")]
     public string description;
     public string function;
     public string[] inputs;
-    public TMP_Text text;
+
+    //
     private Global global = Global.Instance;
 
     public void Show()
@@ -19,6 +25,7 @@ public class ComfirmBox : MonoBehaviour
         text.text = description;
     }
 
+    // 根据不同的功能执行不同的操作
     public void Yes()
     {
         switch (function)
@@ -32,6 +39,7 @@ public class ComfirmBox : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // 关闭确认框
     public void No()
     {
         gameObject.SetActive(false);

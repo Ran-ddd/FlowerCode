@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// 音量管理器
 public class Audio : MonoBehaviour
 {
     public Slider Soundctl;
-    // Start is called before the first frame update
+    private float originVolume;
     void Start()
     {
-        
+        originVolume = AudioListener.volume;
+        Soundctl.value = originVolume;
     }
 
-    // Update is called once per frame
     void Update()
     {
         AudioListener.volume = Soundctl.value;

@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// 统一的 UI 管理器
+// 提供一个全局的 UI 使用接口
+// 统一获取资源再提供给UI，简化其他脚本的资源获取
+
 public class InteractManager : MonoBehaviour
 {
     // 全局单例
     private Global global = Global.Instance;
 
-    // 
+    // 用于位置锁定，防止使用 UI 时角色乱跑
     private Transform playerTarget;
     private Transform player;
 
@@ -77,6 +81,7 @@ public class InteractManager : MonoBehaviour
         PreventClick();
     }
 
+    // 防止点击时角色乱跑
     void PreventClick()
     {
         if (activeMaskUIs.Any(ui => ui.activeSelf))
@@ -90,35 +95,39 @@ public class InteractManager : MonoBehaviour
         }
     }
 
+    // 全局 UI 显示接口
     public void UseUI(string choice, params string[] parameters)
     {
         switch (choice)
         {
             case "Item":
-                UseItemInfoUI(parameters[0]);
+                UseItemInfoUI(parameters[0].Trim());
                 break;
             case "Talk":
-                UseTalkBoxUI(parameters[0]);
+                Debug.Log("Talk");
+                UseTalkBoxUI(parameters[0].Trim());
                 break;
             case "PackItem":
-                UsePackItemInfoUI(parameters[0]);
+                UsePackItemInfoUI(parameters[0].Trim());
                 break;
             case "Bag":
                 UseBagUI();
                 break;
             case "Though":
-                UseThoughUI(parameters[0], float.Parse(parameters[1]));
+                UseThoughUI(parameters[0].Trim(), float.Parse(parameters[1]));
                 break;
             case "Comfirm":
                 UseComfirmBoxUI(parameters[0], parameters[1], parameters.Skip(2).ToArray());
                 break;
             case "ItemToCode":
-                UseItemToCodeInfoUI(parameters[0]);
+                UseItemToCodeInfoUI(parameters[0].Trim());
                 break;
             default:
                 throw new Exception("Invalid UseUI Choice: " + choice);
         }
     }
+
+    // 下列是各个 UI 的使用接口
 
     private void UseItemInfoUI(string itemName)
     {
@@ -133,6 +142,8 @@ public class InteractManager : MonoBehaviour
         talkBoxUI.SetActive(true);
         talkBox.sprite = global.LoadCharacterHeadSpite(talkerName);
         talkBox.textAsset = global.LoadCharacterTextAsset(talkerName);
+        Debug.Log(talkerName);
+        Debug.Log(talkBox.sprite);
         Debug.Log(talkBox.textAsset);
         talkBox.Show();
     }
@@ -151,7 +162,6 @@ public class InteractManager : MonoBehaviour
 
     public void UseThoughUI(string word, float stayTime)
     {
-        Debug.Log("1");
         thoughUI.SetActive(true);
         though.though = word;
         though.stayTime = stayTime;

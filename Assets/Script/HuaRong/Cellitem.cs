@@ -51,13 +51,4 @@ public class Cellitem : MonoBehaviour
             sp.sprite = HuaRongBorad.Inst.mapsps[idx];
         }
     }
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 }

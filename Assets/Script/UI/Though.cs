@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// 角色自言自语的UI，控制显示时间
 public class Though : MonoBehaviour
 {
     [Header("UI")]

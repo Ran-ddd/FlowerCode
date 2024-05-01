@@ -35,9 +35,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // 向量：由玩家到目标
+        // 向量：由玩家到目标位置
         Vector3 displacement = playerTarget.position - transform.position;
-        Debug.Log(displacement);
 
         if (Math.Abs(displacement.x) > offset)
         {
@@ -45,14 +44,19 @@ public class Player : MonoBehaviour
         }
         if (Math.Abs(displacement.y) > offset)
         {
-            Debug.Log("dir: " + Math.Sign(displacement.y - offset));
             dirY = Math.Sign(displacement.y + offset);
         }
 
+        // 角色朝向
         transform.localScale = new Vector3(dirX * originScale.x, originScale.y, originScale.y);
+
+        // 0° 移动
         animator.SetBool("move", displacement != Vector3.zero);
+        // -90° 移动
         animator.SetBool("back", dirY > 0 && Math.Abs(displacement.y) / Math.Abs(displacement.x) > 1f);
+        // -45° 移动
         animator.SetBool("lean", dirY > 0 && Math.Abs(displacement.y) / Math.Abs(displacement.x) <= 1f);
+        // -90° 站立
         animator.SetBool("idleback", dirY > 0);
     }
 }

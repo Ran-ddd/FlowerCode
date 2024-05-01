@@ -36,6 +36,7 @@ public class TalkBox : MonoBehaviour
         StartCoroutine(SetTextUI());
     }
 
+    // 读取玩家输入，进行对话
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -55,12 +56,14 @@ public class TalkBox : MonoBehaviour
         }
     }
 
+    // 刷新对话文本
     void RenewTexts()
     {
         textList = new List<string>(textAsset.text.Split('\n'));
         index = 0;
     }
 
+    // 逐字显示对话
     IEnumerator SetTextUI()
     {
         textFinished = false;
@@ -69,9 +72,8 @@ public class TalkBox : MonoBehaviour
         bool flag = true;
         while (flag && index < textList.Count)
         {
-            Debug.Log(index);
             string[] cmds = textList[index].Trim().Split("-");
-            Debug.Log(cmds[0]);
+            Debug.Log(textList[index]);
             switch (cmds[0])
             {
                 case "<A>":
@@ -84,11 +86,11 @@ public class TalkBox : MonoBehaviour
                     break;
                 case "<C>":
                     global.NextProgress();
-                    if (++index >= textList.Count) gameObject.SetActive(false);
+                    if (index + 1 >= textList.Count) gameObject.SetActive(false);
                     break;
                 case "<D>":
                     TriggerEvent(cmds.Skip(1).ToArray());
-                    if (++index >= textList.Count) gameObject.SetActive(false);
+                    if (index + 1 >= textList.Count) gameObject.SetActive(false);
                     break;
             }
             index++;
@@ -112,11 +114,12 @@ public class TalkBox : MonoBehaviour
         textFinished = true;
     }
 
+    // 对话中的 <D> 指令
     void TriggerEvent(string[] inputs)
     {
         string cmd = inputs[0];
         string[] parameters = inputs.Skip(1).ToArray();
-        Debug.Log(cmd);
+        Debug.Log("TriggerEvent: " + cmd);
         switch (cmd)
         {
             case "LoadScene":
@@ -124,6 +127,9 @@ public class TalkBox : MonoBehaviour
                 break;
             case "UseUI":
                 global.UseUI(parameters[0], parameters.Skip(1).ToArray());
+                break;
+            case "CollectItem":
+                global.collectedItems.Add(parameters[0]);
                 break;
             default:
                 throw new System.Exception("Invalid Text Command: " + "<D>-" + string.Join("-", inputs));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Global
 {
@@ -44,7 +45,7 @@ public class Global
     public TalkFinishDelegate TalkFinish;
 
     // 背包管理
-    public HashSet<string> collectedItems = new() { "Letter" };
+    public HashSet<string> collectedItems = new() { "Letter", "HuanFang" };
     public HashSet<string> comsumedItems = new() { };
     public GameObject itemBeDrag;
     public bool willDragTo = false;
@@ -78,6 +79,9 @@ public class Global
         "Default", // 游戏结束，自由探索
     };
 
+    // 物品管理
+    public List<string> finishedThings = new();
+
     public NextProgressDelegate NextProgress;
 
 
@@ -88,21 +92,32 @@ public class Global
         Debug.Log($"Into Process: {progress}");
     }
 
+
+    // 关卡管理
+    public Dictionary<int, bool> gameLevels = new Dictionary<int, bool> {
+        {4, false}, // 华容道
+        {5, false}, // 算盘
+        {6, false}, // 苏州码
+    };
+
+
     // <------------->
 
     // 资源管理
     public Sprite LoadItemSpite(string name)
     {
+        name = name.Trim();
         Sprite sprite = Resources.Load<Sprite>("Sprite/Item/" + name);
         if (sprite == null)
         {
-            throw new Exception("No such item sprite: " + name);
+            Debug.Log("No such item sprite: " + name);
         }
         return sprite;
     }
 
     public Sprite LoadCharacterSpite(string name)
     {
+        name = name.Trim();
         Sprite sprite = Resources.Load<Sprite>("Sprite/Character/" + name);
         if (sprite == null)
         {
@@ -113,7 +128,8 @@ public class Global
 
     public Sprite LoadCharacterHeadSpite(string name)
     {
-        Sprite sprite = Resources.Load<Sprite>("Sprite/Character/" + name + "Head");
+        name = name.Trim();
+        Sprite sprite = Resources.Load<Sprite>(("Sprite/Character/" + name + "Head").Trim());
         Debug.Log("Sprite/Character/" + name + "Head");
         if (sprite == null)
         {
@@ -124,6 +140,7 @@ public class Global
 
     public TextAsset LoadItemTextAsset(string name)
     {
+        name = name.Trim();
         TextAsset textAsset = Resources.Load<TextAsset>("Text/Item/" + name);
         if (textAsset == null)
         {
@@ -135,6 +152,7 @@ public class Global
 
     public TextAsset LoadCharacterTextAsset(string name)
     {
+        name = name.Trim();
         TextAsset textAsset = Resources.Load<TextAsset>("Text/Character/" + progress + "-" + name);
         TextAsset defaultTextAsset = Resources.Load<TextAsset>("Text/Character/" + "Default-" + name);
         if (textAsset == null)
@@ -143,7 +161,10 @@ public class Global
             {
                 throw new Exception("No such character text asset: " + progress + "-" + name + " or " + "Default-" + name);
             }
-            return defaultTextAsset;
+            else
+            {
+                return defaultTextAsset;
+            }
         }
         return textAsset;
     }

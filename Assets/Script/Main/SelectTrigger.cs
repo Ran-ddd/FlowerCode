@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
+// 用于玩家的多种可选触发条件的判断
 public class SelectTrigger : MonoBehaviour
 {
     [Header("鼠标点击触发")]
@@ -10,7 +11,7 @@ public class SelectTrigger : MonoBehaviour
     [Header("角色触碰触发")]
     public bool canBeTouch = false;
 
-    [Header("角色点击触发")]
+    [Header("角色触碰点击触发")]
     public bool canBeSelect = false;
 
     [Header("可被赋予物品")]
@@ -45,13 +46,13 @@ public class SelectTrigger : MonoBehaviour
             Touch();
         }
 
-        // 角色点击触发
+        // 角色触碰点击触发
         if (canBeSelect && global.IsClickNotOnUI() && isPlayer && isCursor)
         {
             Select();
         }
 
-        // 拖拽触发
+        // 拖放触发
         if (canBeDragTo && Input.GetMouseButtonUp(0) && isCursor && global.itemBeDrag != null)
         {
             global.willDragTo = false;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 背包拖放教程
 public class PackTeach : MonoBehaviour
 {
     public SelectTrigger characterSelectTrigger;

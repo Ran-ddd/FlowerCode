@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 进门教程
 public class DoorTeach : MonoBehaviour
 {
 

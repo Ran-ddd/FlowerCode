@@ -7,9 +7,14 @@ public class Pack : MonoBehaviour
 
     void OnEnable()
     {
+        Reset();
+    }
+
+    public void Reset()
+    {
+        // 显示已经收集的物品，按次序显示
         string[] itemNames = global.collectedItems.Except(global.comsumedItems).ToArray();
         int n = itemNames.Length;
-
         for (int i = 0; i < n; i++)
         {
             GameObject item = GetItemWithOrder(i);

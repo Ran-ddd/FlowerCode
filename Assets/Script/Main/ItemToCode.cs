@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 与Item.cs类似，但属于用于收集苏州码的物品
 public class ItemToCode : MonoBehaviour
 {
     [Header("苏州码")]

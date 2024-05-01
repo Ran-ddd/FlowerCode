@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 物品拾取教程
 public class ItemTeach : MonoBehaviour
 {
     public SelectTrigger itemSelectTrigger;

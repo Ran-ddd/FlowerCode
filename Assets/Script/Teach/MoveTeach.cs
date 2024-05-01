@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 移动教程
 public class MoveTeach : MonoBehaviour
 {
     private SelectTrigger selectTrigger;

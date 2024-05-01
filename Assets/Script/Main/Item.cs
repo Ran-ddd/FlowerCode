@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
         }
     }
 
+    // 物品触发了收集
     void Collect()
     {
         global.UseUI("Item", name);
@@ -26,13 +27,14 @@ public class Item : MonoBehaviour
         selectTrigger.Select -= Collect;
     }
 
+    // 物品收集
     void CollectItem()
     {
         gameObject.SetActive(false);
         global.collectedItems.Add(name);
     }
 
-
+    // 物品是否已经被收集或消耗
     bool IsCollectedOrConSumed()
     {
         return global.collectedItems.Contains(name) || global.comsumedItems.Contains(name);

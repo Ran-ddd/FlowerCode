@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 角色或者鼠标靠近时：显示提示
 public class TipTrigger : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;

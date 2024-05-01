@@ -6,15 +6,8 @@ public class ResetBoard : MonoBehaviour
 {
     public GameObject board;
     public GameObject boardPrefab;
-    void Start()
-    {
-    }
 
-    void Update()
-    {
-
-    }
-
+    // 使用预制件进行算盘重置
     public void BoardReset()
     {
         GameObject newBoard = Instantiate(boardPrefab, board.transform.position, board.transform.rotation);

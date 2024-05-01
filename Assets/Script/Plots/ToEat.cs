@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 干饭提示剧情
 public class ToEat : MonoBehaviour
 {
     private SelectTrigger selectTrigger;

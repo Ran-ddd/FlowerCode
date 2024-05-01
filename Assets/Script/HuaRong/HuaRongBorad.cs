@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class HuaRongBorad : MonoBehaviour
 {
+    private int complexity = 100;
     public static HuaRongBorad Inst;
     public GameObject Cellitem;
     public List<Sprite> mapsps;
@@ -18,7 +19,7 @@ public class HuaRongBorad : MonoBehaviour
     void shuffle()
     {
         int zeroIndex = 8;
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < complexity; i++)
         {
             List<int> positions = new List<int>();
 
@@ -43,8 +44,6 @@ public class HuaRongBorad : MonoBehaviour
         }
         return null;
     }
-
-
 
     Vector3 getCellitemPos(int i, int j)
     {

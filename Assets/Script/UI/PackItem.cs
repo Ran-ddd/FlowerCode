@@ -14,8 +14,16 @@ public class PackItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     // 图像组件
     private Image image;
 
+    // 图片
+    private Sprite originSprite;
+    private Sprite transfromSprite;
+
     // 拖拽管理
     private bool isDrag = false;
+    private bool isleavePack = false;
+
+    // 放大倍数
+    private float scalePower = 4f;
 
     [Header("父对象")]
     public GameObject canvas;
@@ -28,31 +36,72 @@ public class PackItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [Header("物品名称")]
     public string itemName;
 
-
     void Start()
     {
-        image = GetComponent<Image>();
-        image.sprite = global.LoadItemSpite(itemName);
+        RenewSprite();
         initPos = transform.position;
     }
 
+    // 刷新图像
     public void RenewSprite()
     {
-        GetComponent<Image>().sprite = global.LoadItemSpite(itemName);
+        image = GetComponent<Image>();
+        image.sprite = originSprite = global.LoadItemSpite(itemName);
+        transfromSprite = global.LoadItemSpite(itemName + "Transform");
     }
 
     void Update()
     {
+        // 拖拽跟随 + 拖拽到一定距离发生事件
         if (isDrag)
         {
+            Debug.Log(itemName + " is Drag");
             transform.position = Input.mousePosition;
-            SetPackAlpha(Vector3.Distance(transform.position, initPos) > leaveDistance);
+            if (isleavePack != Vector3.Distance(transform.position, initPos) > leaveDistance)
+            {
+                isleavePack = !isleavePack;
+                ItemIfLeavePack();
+            }
         }
     }
 
-    void SetPackAlpha(bool leavePack)
+    // 设置背包透明度
+    void ItemIfLeavePack()
     {
-        pack.GetComponent<Image>().color = new Color(255, 255, 255, leavePack ? 0.5f : 1f);
+        if (isleavePack)
+        {
+            LeavePackEffect();
+        }
+        else
+        {
+            ReturnPackEffect();
+        }
+    }
+
+    // 离开背包
+    void LeavePackEffect()
+    {
+        pack.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
+        transform.localScale *= scalePower;
+
+        bool isCode = int.TryParse(itemName, out int result);
+        if (isCode && transfromSprite != null)
+        {
+            image.sprite = transfromSprite;
+        }
+    }
+
+    // 返回背包
+    void ReturnPackEffect()
+    {
+        pack.GetComponent<Image>().color = new Color(255, 255, 255, 1f);
+        transform.localScale /= scalePower;
+
+        bool isCode = int.TryParse(itemName, out int result);
+        if (isCode)
+        {
+            image.sprite = originSprite;
+        }
     }
 
     // 悬浮时显示信息
@@ -86,22 +135,28 @@ public class PackItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         if (!global.willDragTo)
         {
-            Recycle();
+            Return();
         }
     }
 
-    public void Recycle()
+    // 回收物品，没有被消耗
+    public void Return()
     {
         isDrag = false;
-        global.itemBeDrag = null;
         transform.SetParent(pack.transform);
         transform.position = initPos;
-        pack.GetComponent<Image>().color = new Color(255, 255, 255, 1f);
+        if (isleavePack)
+        {
+            ReturnPackEffect();
+            isleavePack = false;
+        }
     }
 
-    public void Consume()
+    // 回收，并且关闭背包
+    public void ReturnAndCloseBag()
     {
-        Recycle();
+        Return();
+        global.itemBeDrag = null;
         gameObject.SetActive(false);
         global.UseUI("Bag", null);
         global.UseUI("PackItem", "Default");

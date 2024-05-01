@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+// 上菜剧情
 public class ServeDish : MonoBehaviour
 {
     private SelectTrigger selectTrigger;

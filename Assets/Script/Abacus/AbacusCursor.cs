@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbacusCursor : MonoBehaviour
 {
     private CircleCollider2D circleCollider2D;
+
     void Start()
     {
         circleCollider2D = GetComponent<CircleCollider2D>();
@@ -12,6 +13,7 @@ public class AbacusCursor : MonoBehaviour
 
     void Update()
     {
+        // 提供碰撞体，碰撞算珠
         if (Input.GetMouseButtonDown(0))
         {
             circleCollider2D.enabled = true;

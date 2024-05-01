@@ -22,23 +22,27 @@ public class Bead : MonoBehaviour
     {
         distance *= one ? 1 : -1;
     }
-    void Update()
-    {
 
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
+        // 碰撞检测
         if (other.gameObject.CompareTag("Cursor"))
         {
             other.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+
+            // 检测到点击，改变位置
             Change();
         }
     }
 
+    // 算珠移动
     public void Change()
     {
+        // 当前算珠改变位置
         added = !added;
         transform.localPosition += new Vector3(0, distance * (added ? 1 : -1), 0);
+
+        // 递归改变相邻算珠位置
         if (pre != null)
         {
             pre.ChangeByClose(false, added);
@@ -49,8 +53,10 @@ public class Bead : MonoBehaviour
         }
     }
 
+    // 递归改变算珠位置，实现一次拨动多个
     public void ChangeByClose(bool isCallerPre, bool isCallerAdd)
     {
+        // 判断向前拨动还是向后拨动
         if (isCallerPre && !isCallerAdd && added)
         {
             added = false;

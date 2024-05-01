@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+// 随着进度出现或消失
 public class AppearProgress : MonoBehaviour
 {
     // 全局单例

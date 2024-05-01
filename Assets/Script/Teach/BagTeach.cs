@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// 打开背包教程
 public class BagTeach : MonoBehaviour
 {
     public Button bag;

@@ -35,6 +35,7 @@ public class Teach : MonoBehaviour
 
     void NextTeach()
     {
+        // 切换教学对象，并判断是否结束
         if (child != null) child.SetActive(false);
         child = transform.GetChild(++index).gameObject;
         if (index == transform.childCount - 1)
@@ -42,6 +43,8 @@ public class Teach : MonoBehaviour
             global.teachEnd = true;
         }
         child.SetActive(true);
+
+        // 更新教学文字
         RenewWord();
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 退出游戏
 public class QuitGame : MonoBehaviour
 {
     public void OnExitGame()

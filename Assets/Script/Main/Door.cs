@@ -11,11 +11,7 @@ public class Door : MonoBehaviour
         selectTrigger.Select += Select;
     }
 
-    private void OnDisable()
-    {
-        selectTrigger.Select -= Select;
-    }
-
+    // 选择门，切换场景
     void Select()
     {
         SceneManager.LoadScene(targetScene);
