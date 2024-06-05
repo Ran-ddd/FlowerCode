@@ -26,6 +26,12 @@ public class Teach : MonoBehaviour
 
     void Update()
     {
+        if (global.teachEnd)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
         // 当前没有教学对象
         if (child == null || !child.activeSelf)
         {
