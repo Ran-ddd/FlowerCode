@@ -1,0 +1,10 @@
+<B>
+让我算算哈
+<B>
+来，您的钱
+<A>
+好的，谢谢先生
+<D>-UseUI-Though-"《侨批的票据》"-3
+<D>-UseUI-ItemToCode-BillTo
+<D>-CollectItem-9
+<C>

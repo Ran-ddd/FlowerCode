@@ -1,0 +1,32 @@
+using System.Linq;
+using UnityEngine;
+
+public class Pack : MonoBehaviour
+{
+    private Global global = Global.Instance;
+
+    void OnEnable()
+    {
+        Reset();
+    }
+
+    public void Reset()
+    {
+        // 显示已经收集的物品，按次序显示
+        string[] itemNames = global.collectedItems.Except(global.comsumedItems).ToArray();
+        int n = itemNames.Length;
+        for (int i = 0; i < n; i++)
+        {
+            GameObject item = GetItemWithOrder(i);
+            item.SetActive(true);
+            PackItem packItem = item.GetComponent<PackItem>();
+            packItem.itemName = itemNames[i];
+            packItem.RenewSprite();
+        }
+    }
+
+    GameObject GetItemWithOrder(int order)
+    {
+        return transform.Find($"PackItem {order / 5 + 1}{order % 5 + 1}").gameObject;
+    }
+}
